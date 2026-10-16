@@ -4,7 +4,7 @@ Goal: check whether skill v0 helps on two briefs under fixed conditions. It cann
 
 ## Setup
 1. Write two **new** briefs. Every past project has been used to write rules, so none can serve as a test:
-   - one vehicle or character from a single concept image (exercises R001, R004, R005),
+   - one vehicle matching an existing image the user supplies, not one the agent generates (exercises R001, R004, R005). This is the category that took 12 to 13 hours in the past, so it's the main target,
    - one object the user will walk through and sit in, starting from a text brief (exercises R002, R003, R006, R008).
 2. Freeze each brief and its checklist **before** any run. Briefs and results usually contain private project material, so keep them in the private case archive (`evals/` there), not in this repo.
 3. Fix model, tools, starting assets and budget (time or number of generations) for all runs.

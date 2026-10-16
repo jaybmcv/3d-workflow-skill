@@ -1,6 +1,6 @@
 # R009 Agree a triangle budget; never relax a limit silently
 
-- **Status:** hypothesis (3 project families, no user complaint yet)
+- **Status:** supported (3 project families; the user reports the large spacecraft's size cost many extra hours after the initial 12+)
 - **Applies when:** Game assets, or anything that will be placed many times.
 - **Action:** Agree a triangle/draw-call budget at intake. If a check fails against a budget or threshold, report it; don't edit the threshold to pass.
 - **Evidence:**

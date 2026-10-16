@@ -5,7 +5,7 @@ description: Plan, build and verify procedural Three.js 3D models from concept a
 
 # 3D workflow (v0.2)
 
-Built from 13 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game. Guidance for other pipelines (Blender, CAD/printing, image-to-3D) is not evidence-backed yet: apply the general steps, and say when you are outside that evidence.
+Built from 13 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
 
 Rule IDs (R001…) point to `rules/` in the source repo, where each rule has its evidence. Technical gotchas are in `references/threejs-pitfalls.md`; read it before writing geometry or browser checks.
 
@@ -26,8 +26,9 @@ Then apply **ask / assume / mark**:
 - **Assume and state it** when cheap to change later (colours, minor trim).
 - **Mark as inferred** anything the references cannot show (unseen sides, internal depth).
 
-## 2. Lock the references and cameras before modeling (R002, R005)
+## 2. Lock the references and cameras before modeling (R002, R005, R011)
 
+- **No multi-view reference yet?** If you're starting from text, one photo or one view, first make a single concept sheet showing perspective, front, side, top and key details, generated **in one image from one prompt** so the views agree. Get it approved. It becomes the authoritative reference. If you can't generate images here, say so and ask the user to make the sheet with a tool that can, or render an orthographic greybox of front, side and top views for approval instead.
 - Put the authoritative references in priority order. If they contradict each other (for example an exterior with 5 decks and a plan with 6), list the conflicts and get them resolved **before** building.
 - Define **canonical comparison cameras** that match each reference view (position, target, field of view, orthographic or perspective) and get the user to confirm them. Every later comparison uses these exact cameras.
 - Write the decisions to a project log (`PROJECT_LOG.md` or similar) as you go: references and priority, cameras, answers to the intake questions, budgets. Long threads lose early context; the log keeps it (R010).
