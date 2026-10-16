@@ -1,55 +1,65 @@
 ---
 name: 3d-workflow
-description: Plan, build and verify 3D work (concept visuals, editable meshes and game assets, dimensioned or printable parts, interactive Three.js/web scenes) from text, images or video references. Use when the user asks to create, model, recreate or iterate on anything in 3D.
+description: Plan, build and verify procedural Three.js 3D models from concept art or text briefs, from first concept sheet through a walkable, rideable or game-ready asset. Use when the user asks to create, model, recreate, refine or make game-ready anything in 3D, especially vehicles, characters, buildings or scenes in Three.js.
 ---
 
-# 3D workflow (v0, provisional)
+# 3D workflow (v0.2)
 
-Rules marked *provisional* come from a small, yacht-heavy set of past projects. Follow them, but report when one clearly does not fit the job.
+Built from 13 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game. Guidance for other pipelines (Blender, CAD/printing, image-to-3D) is not evidence-backed yet: apply the general steps, and say when you are outside that evidence.
 
-## 1. Intake: route by deliverable
+Rule IDs (R001…) point to `rules/` in the source repo, where each rule has its evidence. Technical gotchas are in `references/threejs-pitfalls.md`; read it before writing geometry or browser checks.
 
-Before choosing tools, identify which deliverable(s) are requested:
+## 1. Intake: ask before modeling (R004)
 
-| Deliverable | Typical representation | What "done" means |
-|---|---|---|
-| Visual concept | Images, renders | Matches references or brief at matched views |
-| Editable mesh / game asset | Mesh (glTF/FBX/OBJ/.blend) | Opens and reimports cleanly, sensible topology and scale, matches references |
-| Dimensioned or printable part | CAD or solid mesh (STEP/STL/3MF) | Dimensions and tolerances correct, manifold, fits mating parts |
-| Interactive scene | Three.js or engine scene | Loads, runs, required interactions and routes work |
+In past projects the user had to add these later, at great cost. Ask the ones that apply in **one short message**, offering a sensible default for each so the user can just say "defaults":
 
-One request can combine several deliverables (for example, a yacht exterior, deck plans and a walkable Three.js scene). **List every requested deliverable and its acceptance check before starting (R003).** Show that list to the user.
+1. **Deliverables:** concept sheet, viewable model, exported GLB, walkable/rideable game asset, website/video? List them back (R003).
+2. **Art style:** realistic/PBR, stylised, toon/cel, low-poly, or match the reference exactly? Never pick one silently.
+3. **Detail level and budget:** hero asset or background prop? Triangle budget for game use (R009).
+4. **Interior:** exterior only, or a modeled interior? If modeled, should avatars walk, sit or lie in it? Working doors, hatches, lifts, windows you can see through?
+5. **Use and movement:** static, drivable, flyable, wearable? What constrains motion (rails, water, roads, free flight)? (R007)
+6. **Scale:** real dimensions or a scale reference; avatar height if walkable (default 2 m tall, 0.6 m wide).
+7. **References:** which images are authoritative, in what priority, and which views they show (R002).
 
-## 2. Missing information: ask, assume or mark
+Then apply **ask / assume / mark**:
+- **Ask** when the answer changes the structure (interior or not, deck count, movement type, export format).
+- **Assume and state it** when cheap to change later (colours, minor trim).
+- **Mark as inferred** anything the references cannot show (unseen sides, internal depth).
 
-- **Ask** when the gap changes correctness or would cause expensive rework (mating dimensions, deck count, required export format).
-- **State an assumption and proceed** when the choice is cheap to reverse (rear-view styling of an exploratory blockout).
-- **Mark as inferred** any geometry the references cannot establish, and say so in the delivery.
+## 2. Lock the references and cameras before modeling (R002, R005)
 
-Useful inputs to request when they matter: orthographic front/side/top views, overall dimensions or a scale reference, the target use (print, render, game engine, web), and the target app or engine version.
+- Put the authoritative references in priority order. If they contradict each other (for example an exterior with 5 decks and a plan with 6), list the conflicts and get them resolved **before** building.
+- Define **canonical comparison cameras** that match each reference view (position, target, field of view, orthographic or perspective) and get the user to confirm them. Every later comparison uses these exact cameras.
+- Write the decisions to a project log (`PROJECT_LOG.md` or similar) as you go: references and priority, cameras, answers to the intake questions, budgets. Long threads lose early context; the log keeps it (R010).
 
 ## 3. Check capabilities individually
 
-Do not infer one capability from another. Code execution does not mean Blender, a CAD kernel, GPU rendering or the target engine is available. Before relying on each step, check whether you can actually:
-
-- inspect the reference images,
-- generate concept images,
-- construct geometry,
-- render previews,
-- export, then reimport the export,
-- run it in the target app or engine.
-
-If a step is unavailable, produce the best fallback (a modeling brief, a script for the user to run, specific requests for screenshots back) and **only claim verification for checks that actually ran.**
+Do not infer one capability from another. Before relying on a step, check you can actually: view the reference images, generate concept images, run code, render and view screenshots, export and reimport a GLB, and run the target game or engine. Only claim checks that actually ran. If something is unavailable, hand over a script or ask for screenshots instead.
 
 ## 4. Build order
 
-1. **Single source of truth (R002, provisional).** Establish one master layout or model with explicit dimension assumptions. Derive every view, plan and render from it. If image references contradict each other, list the contradictions and resolve them (ask, or assume and mark) before modeling.
-2. **Blockout gate (R001, provisional).** Build a blockout. Compare it with the references at matched cameras against silhouette and key proportion criteria. Do not start materials, trim or detail until this gate passes or the user accepts the deviation.
-3. Detail, materials, lighting.
-4. Export and reimport. Check scale, orientation, manifold/topology as relevant.
+1. **Blockout gate (R001).** Build plain masses only. Compare at the canonical cameras for silhouette and key proportions, side by side with the references. No trim, materials or detail until this passes or the user accepts the difference.
+2. **If walkable or rideable, lay out the interior now (R006):** avatar clearances, doors, aisles, stairs, lifts, seats, collision proxies, from the first layout, not retrofitted after the exterior is polished.
+3. **Detail, materials, lighting** in the agreed style.
+4. **Export and reimport** the final file after the last edit; validate it (glTF validator if available).
+5. **Integration** into the target runtime, using its normal flows (menus, catalogue, placement) rather than custom test panels.
 
-Track **visual acceptance** (looks like the reference) and **technical validity** (exports, opens, dimensions, runs) separately. Passing one never substitutes for the other.
+## 5. Verify honestly (R005, R008)
 
-## 5. Completion check (R003, provisional)
+- **Wait for the scene to be fully drawn** before any screenshot or interaction test (see pitfalls). Confirm each capture is fresh and actually changed.
+- **Compare against the frozen references at the canonical cameras.** Never score against images generated from your own model; that only measures self-consistency.
+- **Don't promise a fidelity percentage** ("99% match") unless a measurement method is agreed. Use a written checklist of silhouette, proportions, landmark features and colours, and report the differences that remain.
+- Check clearances with **whole footprints and both ends** of stairs and ramps, from top, low, entrance and player views, not just centre points.
 
-Before saying the work is done, map every item from the intake list to an artifact that exists, opens, and that you have inspected. Report each item as passed, failed, or not verified (with why). A strong hero render does not cover a missing plan or a missing editable file.
+## 6. Done means each track is evidenced separately (R003)
+
+Before saying it's done, map every deliverable from intake to evidence, and report each of these tracks separately:
+
+| Track | Evidence |
+|---|---|
+| Visual | Side-by-side at canonical cameras, plus the user's verdict |
+| Technical | Export valid, reimports, triangle count within budget |
+| Runtime | Works in the target app using its normal controls |
+| Release | Merged, deployed, served revision checked (only if asked) |
+
+Passing one track never stands in for another: zero export errors does not mean it looks right. Never relax a budget or a test threshold to make a check pass without saying so (R009).

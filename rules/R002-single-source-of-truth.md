@@ -1,8 +1,13 @@
-# R002 One master model, derive all views
+# R002 One authoritative reference set, conflicts resolved first
 
-- **Status:** hypothesis (provisional in skill v0)
-- **Applies when:** the deliverable includes several views, plans or a model built from multiple concept images.
-- **Action:** establish one master layout or model with explicit dimension assumptions, and derive views and plans from it. List contradictions between image references and resolve or mark them before modeling.
-- **Evidence:** 1 case (lineage `yacht-b`, details in the private case archive). The user reported that contradictory concept images caused Three.js modeling problems. This is a user report, not an independently reproduced failure.
-- **Exceptions / counterexamples:** none recorded yet.
-- **Verify by:** deck count, major features, stairs, openings and dimensions agree across the model and plans. For interactive briefs, the required circulation route works.
+- **Status:** supported (5 project families)
+- **Applies when:** More than one reference image, plan or variant describes the same object.
+- **Action:** Rank the references, list contradictions between them and get them resolved (or assume and mark) before modeling. Derive all views and plans from one master model.
+- **Evidence:**
+  - Six-deck superyacht: the exterior was generated as "Exactly five levels" and the plan as "SIX" levels; at least four user clarification turns followed ("what are you confused about now?").
+  - Procedural island scene: the user had to supply a greybox and say "try to match the greybox more" to fix scale drift.
+  - High-speed train: the first concept read "light rail" as an urban tram; the user had to restate the 200 km/h intercity intent.
+  - Walkable cargo spaceship: the user asked to "compare it to the sheets from the applicable angles" and the comparison set was never fixed.
+  - Large spacecraft: user verdict, progress felt like "steps back then one forward" until the user specified which concept sheets to use.
+- **Exceptions / counterexamples:** A single reference image with nothing to conflict with.
+- **Verify by:** A written reference priority list and resolved-conflicts list exist before the blockout.

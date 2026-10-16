@@ -1,8 +1,12 @@
-# R001 Blockout gate before polish
+# R001 Blockout gate before detail
 
-- **Status:** hypothesis (provisional in skill v0)
-- **Applies when:** the result must match reference images or a specific silhouette.
-- **Action:** before materials, trim or detail, compare a blockout against the references at matched cameras for silhouette and key proportions. Track visual acceptance separately from technical validity.
-- **Evidence:** 1 case (lineage `yacht-a`, details in the private case archive). Many finish details were added and technical checks passed, while key proportions and reference fidelity stayed unresolved. Recorded partial outcome. Avoidable hours not established.
-- **Exceptions / counterexamples:** none recorded yet. Probably low value for purely procedural or abstract work without references.
-- **Verify by:** on the matched-camera checklist, the mandatory silhouette and proportion criteria pass. Polish cannot offset a failed shape criterion.
+- **Status:** supported (4 project families)
+- **Applies when:** The result must match reference images or a specific silhouette.
+- **Action:** Build plain masses first and compare them at the canonical cameras for silhouette and key proportions. Start materials, trim and detail only after this passes or the user accepts the difference.
+- **Evidence:**
+  - Large spacecraft: two detail and material passes ran before the user called the body-to-tail join "all janky", then asked for a different structure entirely.
+  - Procedural island scene: detailed construction was declared complete several times while layout, scale and contact problems were still open ("extremely low-poly", "scaling so far off").
+  - Six-deck superyacht: repeated cosmetic and proportion edits while the deck interpretation was still unresolved.
+  - Earlier yacht retrospective (not in the archive): finish detail passed technical checks while proportions stayed off.
+- **Exceptions / counterexamples:** Purely procedural or abstract work with no reference.
+- **Verify by:** Mandatory silhouette and proportion criteria pass at the canonical cameras before any detail commit.

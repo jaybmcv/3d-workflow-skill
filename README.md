@@ -1,8 +1,8 @@
 # 3d-workflow-skill
 
-An agent skill for planning, building and verifying 3D work: concept visuals, editable meshes and game assets, dimensioned or printable parts, and interactive Three.js/web scenes.
+An agent skill for planning, building and verifying procedural Three.js models from concept art or a text brief, from the first concept sheet through a walkable, rideable or game-ready asset.
 
-**Status: v0, provisional.** The rules are drawn from a small number of real projects and have not been evaluated yet. See `rules/` for the evidence behind each one.
+**Status: v0.2, not yet evaluated.** Rules come from 13 real projects across Claude and ChatGPT/Codex. All were procedural Three.js, so other pipelines (Blender, CAD and 3D printing, image-to-3D) are not covered by evidence yet. See `rules/` for the evidence and status behind each rule.
 
 ## Install
 
@@ -15,7 +15,8 @@ The skill lives in `skill/` and uses the shared `SKILL.md` format.
 ## Layout
 
 ```
-skill/SKILL.md   The skill: route by deliverable, ask/assume/mark, capability checks, build order, completion check
+skill/SKILL.md                         The skill: intake questions, reference and camera lock, build order, verification, done criteria
+skill/references/threejs-pitfalls.md   Technical gotchas that each cost a fix round in a past project
 rules/           One file per rule: when it applies, action, evidence, exceptions, how to verify, status
 evals/README.md  Pilot evaluation protocol and adoption bar
 ```
