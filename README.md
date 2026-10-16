@@ -2,7 +2,7 @@
 
 An agent skill for planning, building and verifying procedural Three.js models from concept art or a text brief, from the first concept sheet through a walkable, rideable or game-ready asset.
 
-**Status: v0.2, not yet evaluated.** Rules come from 13 real projects across Claude and ChatGPT/Codex. All were procedural Three.js. Blender, CAD and 3D printing, and image-to-3D are out of scope for now. See `rules/` for the evidence and status behind each rule.
+**Status: v0.2, not yet evaluated.** Rules come from 14 real projects (13 successes and 1 failure) across Claude and ChatGPT/Codex. All were procedural Three.js. Blender, CAD and 3D printing, and image-to-3D are out of scope for now. See `rules/` for the evidence and status behind each rule.
 
 ## Install
 
@@ -16,6 +16,7 @@ The skill lives in `skill/` and uses the shared `SKILL.md` format.
 
 ```
 skill/SKILL.md                         The skill: intake questions, reference and camera lock, build order, verification, done criteria
+skill/references/coherence-audit.md    How to check concept sheets agree with each other before modeling
 skill/references/threejs-pitfalls.md   Technical gotchas that each cost a fix round in a past project
 rules/           One file per rule: when it applies, action, evidence, exceptions, how to verify, status
 evals/README.md  Pilot evaluation protocol and adoption bar
