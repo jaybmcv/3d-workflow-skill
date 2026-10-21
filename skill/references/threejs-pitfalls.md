@@ -9,6 +9,12 @@ Each item cost at least one fix round in a past project. Check the relevant ones
 - **Don't edit a test's expected value to match the model** without an independent check against the reference. Compare feature ratios (head width to leg length), not raw heights measured off a perspective drawing.
 - **Windows on curved or layered hulls.** Flat boxes stick out or get hidden. Sample the surrounding surface, recess the frame, move openings off seams, and cut through every cladding layer. Test pane edges, not just centres, from inside and outside. If interior decks are hidden in exterior view, their windows disappear too.
 - **Clearance around rotated objects.** Check the whole rotated footprint, not a centre point. A moved object can collide with a neighbour that was clear before.
+- **Furniture overlapping furniture.** Check pieces against each other, not only against walls and windows: a sofa arm crossing into the next sectional piece was spotted by the user in the pilot.
+- **Walking room around tables and counters.** Leave about 0.6 m clear on any side the avatar must pass. In the pilot a dining table set too close to the kitchen made the boat fail the walk-through check.
+
+## Text and logos
+
+- **Copy text and logos from the reference instead of retyping them.** Crop the lettering or logo out of the reference image and use it as a decal texture, or trace its outlines. Retyped text in a different font and rebuilt logos were the main look complaint on both pilot spacesuit models.
 
 ## Export (GLB / glTF)
 

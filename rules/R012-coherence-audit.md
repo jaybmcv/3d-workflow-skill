@@ -9,5 +9,6 @@
   - Procedural island scene: drift continued until the user supplied a greybox as the master.
   - Large spacecraft (user verdict): progress went backwards until the user specified which concept sheets to use.
   - Hours (user estimates): projects whose generated sheets cohered took 1 to 2 hours (hot-air balloon, wearable jetpack, both trains). Both yachts, whose sheets did not cohere, took about 4 hours each, and one failed.
+  - Pilot (2026-10-20): the Codex skill run audited its generated sheet and found 4 conflicts, but resolved them itself in a blockout instead of showing them; the user approved without seeing the list. v0.4 requires the conflict list in the approval request.
 - **Exceptions / counterexamples:** single-view references with nothing to cross-check. The yacht agent also over-reported one conflict that was really perspective, which is why the audit uses a greybox to confirm.
 - **Verify by:** a conflicts list with recorded decisions exists before the first non-greybox geometry is built.

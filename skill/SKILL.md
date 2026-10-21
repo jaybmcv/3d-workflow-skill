@@ -3,15 +3,19 @@ name: 3d-workflow
 description: Plan, build and verify procedural Three.js 3D models from concept art or text briefs, from first concept sheet through a walkable, rideable or game-ready asset. Use when the user asks to create, model, recreate, refine or make game-ready anything in 3D, especially vehicles, characters, buildings or scenes in Three.js.
 ---
 
-# 3D workflow (v0.3)
+# 3D workflow (v0.4)
 
-Built from 14 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
+Built from 14 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game, and tested in a 4-run pilot. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
 
 Rule IDs (R001…) point to `rules/` in the source repo, where each rule has its evidence. Technical gotchas are in `references/threejs-pitfalls.md`; read it before writing geometry or browser checks.
 
-## 1. Intake: ask before modeling (R004)
+## 1. Intake: stop and ask before anything else (R004)
 
-In past projects the user had to add these later, at great cost. Ask the ones that apply in **one short message**, offering a sensible default for each so the user can just say "defaults":
+**This is a hard stop.** Your first reply is the intake message. Don't generate images, write code or build a blockout until the user answers, even when running autonomously. Proceed on defaults only if the user replies "defaults" or the brief already answers every question below. In the pilot, a run that skipped this delivered a boat without the bathroom, canopy and interior stairs the user wanted, and needed a correction round.
+
+A brief that names some rooms or parts doesn't say the others aren't wanted. "Bedroom, galley and roof deck" leaves open whether there's a bathroom. Ask; don't treat "not mentioned" as "not wanted".
+
+Ask the ones that apply in **one short message**, offering a sensible default for each so the user can just say "defaults":
 
 1. **Deliverables:** concept sheet, viewable model, exported GLB, walkable/rideable game asset, website/video? List them back (R003).
 2. **Art style:** realistic/PBR, stylised, toon/cel, low-poly, or match the reference exactly? Never pick one silently.
@@ -20,6 +24,7 @@ In past projects the user had to add these later, at great cost. Ask the ones th
 5. **Use and movement:** static, drivable, flyable, wearable? What constrains motion (rails, water, roads, free flight)? (R007)
 6. **Scale:** real dimensions or a scale reference; avatar height if walkable (default 2 m tall, 0.6 m wide).
 7. **References:** which images are authoritative, in what priority, and which views they show (R002).
+8. **Anything else it should have:** other rooms, fixtures or features the brief didn't name (bathroom, storage, canopy, lights), and any text or logos that must be exact.
 
 Then apply **ask / assume / mark**:
 - **Ask** when the answer changes the structure (interior or not, deck count, movement type, export format).
@@ -32,6 +37,7 @@ Then apply **ask / assume / mark**:
 - **Audit the sheet for coherence before anyone approves it and before modeling (R012).** Follow `references/coherence-audit.md`: count levels, windows, doors, stairs and fixed features in every view; check that each exterior window lines up with something sensible inside; rule out perspective effects with a quick greybox; then list the conflicts and get decisions. Asking the image generator for consistency is not a check.
 - Put the authoritative references in priority order. If they contradict each other (for example an exterior with 5 decks and a plan with 6), list the conflicts and get them resolved **before** building.
 - Define **canonical comparison cameras** that match each reference view (position, target, field of view, orthographic or perspective) and get the user to confirm them. Every later comparison uses these exact cameras.
+- **Every approval request lists its assumptions.** When you ask the user to approve a sheet or blockout, list what approving it locks in: rooms and features (including what's left out), levels, where stairs and doors are, overall size, budget, style and deliverables. Show the coherence-audit conflicts and how you propose to resolve each. Approving the look must not silently approve a missing bathroom or exterior stairs.
 - Write the decisions to a project log (`PROJECT_LOG.md` or similar) as you go: references and priority, cameras, answers to the intake questions, budgets. Long threads lose early context; the log keeps it (R010).
 
 ## 3. Check capabilities individually
