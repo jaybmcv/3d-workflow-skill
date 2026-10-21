@@ -2,7 +2,7 @@
 
 An agent skill for planning, building and verifying procedural Three.js models from concept art or a text brief, from the first concept sheet through a walkable, rideable or game-ready asset.
 
-**Status: v0.5.** Piloted on two briefs (v0.3): the skill runs were the user's pick both times and passed more required checks, at about 2.5× the agent time. Rules come from 16 real projects (14 successes and 2 failures) across Claude and ChatGPT/Codex. All were procedural Three.js (one used headless Blender to smooth a car body). Blender as the main pipeline, CAD and 3D printing, and image-to-3D are out of scope for now. See `rules/` for the evidence and status behind each rule.
+**Status: v0.5.** Piloted on two briefs (v0.3): the skill runs were the user's pick both times and passed more required checks, at about 2.5× the agent time. Rules come from 16 real projects (14 successes and 2 failures) across Claude and ChatGPT/Codex. All delivered in Three.js; one used headless Blender to smooth a car body, and the skill allows Blender as an optional helper. A Blender-only workflow, CAD and 3D printing, and image-to-3D are out of scope for now. See `rules/` for the evidence and status behind each rule.
 
 ## Install
 

@@ -5,7 +5,7 @@ description: Plan, build and verify procedural Three.js 3D models from concept a
 
 # 3D workflow (v0.5)
 
-Built from 16 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game, and tested in a 4-run pilot. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
+Built from 16 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game, and tested in a 4-run pilot. The deliverable is always Three.js. Blender may be used as a helper (see section 3), but a Blender-only workflow, CAD/3D printing and image-to-3D services are out of scope for now; if asked for those, say this skill doesn't cover them.
 
 Rule IDs (R001…) point to `rules/` in the source repo, where each rule has its evidence. Technical gotchas are in `references/threejs-pitfalls.md`; read it before writing geometry or browser checks.
 
@@ -43,6 +43,8 @@ Then apply **ask / assume / mark**:
 ## 3. Check capabilities individually
 
 Do not infer one capability from another. Before relying on a step, check you can actually: view the reference images, generate concept images, run code, render and view screenshots, export and reimport a GLB, and run the target game or engine. Only claim checks that actually ran. If something is unavailable, hand over a script or ask for screenshots instead.
+
+**Blender as a helper.** If Blender is installed, it may be run headless (`blender -b -P script.py`) for steps Three.js does poorly, mainly smoothing a body from a subdivision cage with creased character lines. Check it actually runs before relying on it. Export the result as GLB, load it back into the Three.js page, and verify it there; the user never needs Blender to view or edit the deliverable. Never make Blender a requirement: if it isn't available, do the same step in Three.js.
 
 ## 4. Build order
 

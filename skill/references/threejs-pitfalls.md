@@ -12,7 +12,7 @@ Each item cost at least one fix round in a past project. Check the relevant ones
 - **Furniture overlapping furniture.** Check pieces against each other, not only against walls and windows: a sofa arm crossing into the next sectional piece was spotted by the user in the pilot.
 - **Walking room around tables and counters.** Leave about 0.6 m clear on any side the avatar must pass. In the pilot a dining table set too close to the kitchen made the boat fail the walk-through check.
 
-- **Smooth car-like bodies from many separately tuned surfaces.** Independent surface functions for nose, roof and shoulders drift apart, and fixing one creates a bump next to it. Build the main body as one control cage with subdivision and creased character lines, settle the silhouette on that, then add details.
+- **Smooth car-like bodies from many separately tuned surfaces.** Independent surface functions for nose, roof and shoulders drift apart, and fixing one creates a bump next to it. Build the main body as one control cage with subdivision and creased character lines (headless Blender works well for this when available; export GLB and reload it in the page), settle the silhouette on that, then add details.
 - **Parts whose correctness depends on orientation** (seat backs, hinges, wings, door swing). A sign error in a rotation tipped every seat back forward and went unnoticed because no side-on check was rendered. Render an orthographic view of such parts against their reference before shipping.
 - **Open shells.** If the user can orbit underneath or look through windows and doors, close the body with inner panels and floors, or model a basic interior, and say which it is. "Completely empty inside" was a failure reason.
 
