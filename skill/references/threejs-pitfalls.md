@@ -12,6 +12,10 @@ Each item cost at least one fix round in a past project. Check the relevant ones
 - **Furniture overlapping furniture.** Check pieces against each other, not only against walls and windows: a sofa arm crossing into the next sectional piece was spotted by the user in the pilot.
 - **Walking room around tables and counters.** Leave about 0.6 m clear on any side the avatar must pass. In the pilot a dining table set too close to the kitchen made the boat fail the walk-through check.
 
+- **Smooth car-like bodies from many separately tuned surfaces.** Independent surface functions for nose, roof and shoulders drift apart, and fixing one creates a bump next to it. Build the main body as one control cage with subdivision and creased character lines, settle the silhouette on that, then add details.
+- **Parts whose correctness depends on orientation** (seat backs, hinges, wings, door swing). A sign error in a rotation tipped every seat back forward and went unnoticed because no side-on check was rendered. Render an orthographic view of such parts against their reference before shipping.
+- **Open shells.** If the user can orbit underneath or look through windows and doors, close the body with inner panels and floors, or model a basic interior, and say which it is. "Completely empty inside" was a failure reason.
+
 ## Text and logos
 
 - **Copy text and logos from the reference instead of retyping them.** Crop the lettering or logo out of the reference image and use it as a decal texture, or trace its outlines. Retyped text in a different font and rebuilt logos were the main look complaint on both pilot spacesuit models.
@@ -28,6 +32,8 @@ Each item cost at least one fix round in a past project. Check the relevant ones
 - **Stale captures.** Hidden or background browser tabs slow or pause their render loop. Bring the tab to the front, wait, and confirm the image changed before drawing conclusions.
 - **Toon or cel shading looks washed out.** Usually the camera is looking at the shadow side. Put the key light on the camera side, as the reference drawing is lit, before tuning colours.
 - **Mirrored views.** If any review camera flips the canvas, all modes (review, capture, play) must use the same handedness, or comparisons will mislead.
+
+- **Performance measured only in a headless renderer.** Software rendering (SwiftShader) hides the cost of hardware antialiasing and full-screen glow passes. One viewer drew a frame in 268 ms on the user's GPU with them and under 10 ms without. Add a small diagnostics readout (frame and draw time) and check on the user's real browser early.
 
 ## Browser automation
 

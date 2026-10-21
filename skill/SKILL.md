@@ -3,9 +3,9 @@ name: 3d-workflow
 description: Plan, build and verify procedural Three.js 3D models from concept art or text briefs, from first concept sheet through a walkable, rideable or game-ready asset. Use when the user asks to create, model, recreate, refine or make game-ready anything in 3D, especially vehicles, characters, buildings or scenes in Three.js.
 ---
 
-# 3D workflow (v0.4)
+# 3D workflow (v0.5)
 
-Built from 14 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game, and tested in a 4-run pilot. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
+Built from 16 real projects (Claude and ChatGPT/Codex), all procedural Three.js from concept art, most later made walkable or drivable in a game, and tested in a 4-run pilot. Out of scope for now: Blender, CAD/3D printing and image-to-3D services. If asked for those, say this skill doesn't cover them.
 
 Rule IDs (R001…) point to `rules/` in the source repo, where each rule has its evidence. Technical gotchas are in `references/threejs-pitfalls.md`; read it before writing geometry or browser checks.
 
@@ -22,7 +22,7 @@ Ask the ones that apply in **one short message**, offering a sensible default fo
 3. **Detail level and budget:** hero asset or background prop? Triangle budget for game use (R009).
 4. **Interior:** exterior only, or a modeled interior? If modeled, should avatars walk, sit or lie in it? Working doors, hatches, lifts, windows you can see through?
 5. **Use and movement:** static, drivable, flyable, wearable? What constrains motion (rails, water, roads, free flight)? (R007)
-6. **Scale:** real dimensions or a scale reference; avatar height if walkable (default 2 m tall, 0.6 m wide).
+6. **Scale and fidelity:** real dimensions or a scale reference; avatar height if walkable (default 2 m tall, 0.6 m wide). Is the target a visual likeness or a measured 1:1 replica? Without published dimensions, only a visual likeness can be verified, so say so.
 7. **References:** which images are authoritative, in what priority, and which views they show (R002).
 8. **Anything else it should have:** other rooms, fixtures or features the brief didn't name (bathroom, storage, canopy, lights), and any text or logos that must be exact.
 
@@ -52,10 +52,12 @@ Do not infer one capability from another. Before relying on a step, check you ca
 4. **Export and reimport** the final file after the last edit; validate it (glTF validator if available).
 5. **Integration** into the target runtime, using its normal flows (menus, catalogue, placement) rather than custom test panels.
 
-## 5. Verify honestly (R005, R008)
+## 5. Verify honestly (R005, R008, R013)
 
 - **Wait for the scene to be fully drawn** before any screenshot or interaction test (see pitfalls). Confirm each capture is fresh and actually changed.
 - **Compare against the frozen references at the canonical cameras.** Never score against images generated from your own model; that only measures self-consistency.
+- **Measure the fit when matching photos or art (R013).** Fit a camera to each reference image from landmark points (wheel centres, corners, lamp edges), overlay the model's edges on the image, and report the reprojection error each pass so progress is a number, not an impression. Anchor scale on something of known size in the photos (a licence plate, a tyre, a door). Prefer near-orthographic photos for tracing profiles.
+- **Look beyond the preset cameras before calling it ready.** Orbit to low, high and unscripted angles and look underneath and through openings. A raised shoulder and an empty shell were found by the user from angles the agent never checked.
 - **Don't promise a fidelity percentage** ("99% match") unless a measurement method is agreed. Use a written checklist of silhouette, proportions, landmark features and colours, and report the differences that remain.
 - Check clearances with **whole footprints and both ends** of stairs and ramps, from top, low, entrance and player views, not just centre points.
 
