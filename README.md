@@ -6,6 +6,16 @@ An agent skill for planning, building and verifying procedural Three.js models f
 
 ## Install
 
+**Easiest:** paste this into any Codex or Claude Code session once:
+
+```
+Install the 3d-workflow skill for all my future sessions: download https://github.com/jaybmcv/3d-workflow-skill (latest main) and copy its skill/ folder to your user-level skills folder as 3d-workflow, so every project has it. Tell me the exact path you used, and don't start any 3D work in this session.
+```
+
+To update later, ask any session: "update my 3d-workflow skill from GitHub".
+
+**By hand:**
+
 The skill lives in `skill/` and uses the shared `SKILL.md` format.
 
 - **Claude Code:** copy or symlink `skill/` to `~/.claude/skills/3d-workflow/` (personal) or `.claude/skills/3d-workflow/` (project). This repo already links it at `.claude/skills/3d-workflow`.
